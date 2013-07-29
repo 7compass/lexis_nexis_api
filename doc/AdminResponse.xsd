@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.cpscreen.com/schemas" xmlns="http://www.cpscreen.com/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1">
+	<xs:element name="ChoicePointAdminResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Error" type="ErrorType" minOccurs="0"/>
+				<xs:element name="ChangePassword" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="Status"/>
+							<xs:element name="Account" type="xs:string"/>
+							<xs:element name="UserId" type="xs:string"/>
+							<xs:element name="Password" type="xs:string"/>
+							<xs:element name="NewPassword" type="xs:string" minOccurs="0"/>
+							<xs:element name="Error" type="ErrorType" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="PackageDetail" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="Status"/>
+							<xs:element name="PackageId" type="xs:string"/>
+							<xs:element name="Name" type="xs:string" minOccurs="0"/>
+							<xs:element name="Price" type="xs:string" minOccurs="0"/>
+							<xs:element name="Components" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Component" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Type" type="xs:string"/>
+													<xs:element name="Subtype" type="xs:string" minOccurs="0"/>
+													<xs:element name="Name" type="xs:string"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Error" type="ErrorType" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="userId" type="xs:string"/>
+			<xs:attribute name="account" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="ErrorType">
+		<xs:sequence>
+			<xs:element name="ErrorCode" type="xs:string"/>
+			<xs:element name="ErrorDescription" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Status">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="Complete"/>
+				<xs:enumeration value="Fail"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>

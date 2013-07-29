@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    targetNamespace="http://www.cpscreen.com/schemas"
+    xmlns:tns="http://www.cpscreen.com/schemas"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.cpscreen.com/schemas">
+      <xs:include schemaLocation="AdminRequest.xsd"/>
+      <xs:include schemaLocation="AdminResponse.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="AdminRequestMessage">
+    <wsdl:part name="Message" element="tns:ChoicePointAdminRequest"/>
+  </wsdl:message>
+  <wsdl:message name="AdminResponseMessage">
+    <wsdl:part name="Message" element="tns:ChoicePointAdminResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="AdminInterface">
+    <wsdl:operation name="ChangePasswords">
+      <wsdl:input message="tns:AdminRequestMessage"/>
+      <wsdl:output message="tns:AdminResponseMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPackages">
+      <wsdl:input message="tns:AdminRequestMessage"/>
+      <wsdl:output message="tns:AdminResponseMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AdminSoapHttpBinding" type="tns:AdminInterface">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ChangePasswords">
+      <soap:operation soapAction="http://www.cpscreen.com/pub/xchange/admin/ChangePasswords"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPackages">
+      <soap:operation soapAction="http://www.cpscreen.com/pub/xchange/admin/GetPackages"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AdminService">
+    <wsdl:port name="AdminEndpoint" binding="tns:AdminSoapHttpBinding">
+      <soap:address location="https://www.cpscreen.com/pub/xchange/admin"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://www.cpscreen.com/schemas" xmlns="http://www.cpscreen.com/schemas" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" version="1">
+	<xs:include schemaLocation="CPScreenings.xsd"/>
+	<xs:element name="BackgroundReports">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="BackgroundReportPackage" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ProviderReferenceId" type="xs:string" minOccurs="0"/>
+							<xs:element name="PackageInformation" type="PackageInformationType" minOccurs="0"/>
+							<xs:element name="PersonalData" type="PersonalDataType" minOccurs="0"/>
+							<xs:element name="ScreeningStatus" type="ScreeningStatusType" minOccurs="0"/>
+							<xs:element name="ScreeningResults" type="ScreeningResultsType" minOccurs="0"/>
+							<xs:element name="SupportingDocumentation" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="InternetWebAddress" type="xs:string" minOccurs="0" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Screenings" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Screening" type="ScreeningType" minOccurs="0" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ErrorReport" type="ErrorReportType" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+						<xs:attribute name="type">
+							<xs:simpleType>
+								<xs:restriction base="xs:NMTOKEN">
+									<xs:enumeration value="report"/>
+									<xs:enumeration value="errors"/>
+									<xs:enumeration value="message"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="userId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ChoicePoint assigned customer user id. The max length
+						of the userId is 30 characters.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="account" type="xs:string"/>
+			<xs:attribute name="cpUserId" type="xs:string"/>
+			<xs:attribute name="cpPassword" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
