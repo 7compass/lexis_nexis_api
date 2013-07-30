@@ -14,9 +14,9 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "lexis_nexis_api"
 
-  s.add_runtime_dependency("nokogiri", "> 0")
-  s.add_runtime_dependency("net/http", "> 0")
-  s.add_runtime_dependency("net/https", "> 0")
+  s.add_runtime_dependency("nokogiri")
+  s.add_runtime_dependency("net/http")
+  s.add_runtime_dependency("net/https")
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
