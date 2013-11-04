@@ -95,7 +95,12 @@ module LexisNexisApi
 
       def send_request
         self.http_process = Net::HTTP.new( host_from_url, port_from_url, self.proxy, self.proxy_port )
-        self.http_process.use_ssl = is_ssl?
+
+        if is_ssl?
+          self.http_process.ca_file = File.join(File.dirname(__FILE__), "ssl_certs", "ca-bundle.crt")
+          self.http_process.verify_mode = OpenSSL::SSL::VERIFY_PEER
+          self.http_process.use_ssl = true
+        end
 
         http_process.start
         resp = http_process.post(self.url, self.body, self.headers)
